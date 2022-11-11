@@ -13,7 +13,7 @@ jobs:
           - "-DWITH_OPENSSL=ON  -DWITH_GNUTLS=OFF -DWITH_GCRYPT=OFF" # build with OpenSSL
           - "-DWITH_OPENSSL=OFF -DWITH_GNUTLS=ON  -DWITH_GCRYPT=ON"  # build with GnuTLS and Libgrypt
           - "-DWITH_OPENSSL=OFF -DWITH_GNUTLS=OFF -DWITH_GCRYPT=OFF" # build without external encryption libraries
-          - "-DWITH_OPENSSL=ON  -DWITH_GNUTLS=OFF -DWITH_GCRYPT=OFF -DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-cross-mingw32-linux.cmake" # crosscompile with MinGW toolchain
+          - "-DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-cross-mingw32-linux.cmake" # crosscompile with MinGW toolchain
         include:
           - os: macos-latest
             macos_cmake_options: "-DOPENSSL_ROOT_DIR=/usr/local/opt/openssl" # set this extra var for OSX

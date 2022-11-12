@@ -44,3 +44,17 @@ jobs:
           cd build
           cp /usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll test/ || true # used only for MinGW tests, ok to fail for other cases
           ctest --output-on-failure
+      - name : Upload 
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: hkusu/s3-upload-action@v2
+        id: upload # specify some ID for use in subsequent steps
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'ap-northeast-2'
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
+          file-path: './build/example.exe'
+          destination-dir: '1122'
+          output-file-url: 'true' # specify true
+      - name: Show URL
+        run: echo '${{ steps.upload.outputs.file-url }}' # use this output

@@ -20,7 +20,7 @@ jobs:
         exclude:
           - os: macos-latest
             cmake_options: "-DCMAKE_TOOLCHAIN_FILE=../cmake/Toolchain-cross-mingw32-linux.cmake" # don't test MinGW from OSX
-    runs-on: ubuntu-latest #${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - name: Install Ubuntu Build Dependencies

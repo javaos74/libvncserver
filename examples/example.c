@@ -291,6 +291,10 @@ void intHandler(int dummy) {
 
 int main(int argc,char** argv)
 {
+#ifdef WIN32
+  maxx = GetSystemMetrics(SM_XVIRTUALSCREEN);
+  maxy = GetSystemMetrics(SM_YVIRTUALSCREEN);
+#endif
   rfbScreenInfoPtr rfbScreen = rfbGetScreen(&argc,argv,maxx,maxy,8,3,bpp);
   if(!rfbScreen)
     return 1;
